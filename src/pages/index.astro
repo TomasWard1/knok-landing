@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/globals.css';
+
+const levels = [
+  { num: '01', name: 'WHISPER', desc: 'A gentle tap. Something happened and your agent wants you to know. No action needed.', badge: 'fades away on its own', accent: false },
+  { num: '02', name: 'NUDGE', desc: 'A banner that waits. Your agent needs an answer before it can move forward.', badge: 'waits for your response', accent: false },
+  { num: '03', name: 'KNOCK', desc: 'This one has sound. Your agent is blocked and needs you now. Appears over everything.', badge: 'loud · stays on top', accent: false },
+  { num: '04', name: 'BREAK', desc: 'Full screen. Every display. Nothing works until you respond. For when it really cannot wait.', badge: 'full-screen takeover', accent: true },
+];
+
+const steps = [
+  { num: 'STEP 01', title: 'YOUR AGENT HITS A WALL', desc: "It needs a decision, an approval, a human call. And it has no reliable way to reach you. Notifications get swallowed. DND wins." },
+  { num: 'STEP 02', title: 'KNOK BREAKS THROUGH', desc: "A native macOS window appears at whatever urgency level the agent chose. Do Not Disturb doesn't touch it. Focus mode ignores it. It just shows up." },
+  { num: 'STEP 03', title: 'YOU RESPOND. IT CONTINUES.', desc: "Click a button. Your agent gets the answer and keeps going. No emails, no Slack, no checking a dashboard." },
+];
+
+const integrations = [
+  { label: 'MCP SERVER', title: 'Claude Code · Cursor', desc: 'One line in your MCP settings. Your agent calls knok like any other tool — no extra code.', dark: false },
+  { label: 'CLI', title: 'Any script, any language', desc: 'Run knok from bash, Python, Node, or any cron job. Exit code tells you which button was clicked.', dark: false },
+  { label: 'UNIX SOCKET', title: 'Direct integration', desc: 'Send JSON, get the human\'s response. Works from any language that speaks sockets.', dark: false },
+  { label: 'CLAUDE CODE SKILL', title: 'Drop-in skill file', desc: 'Drop SKILL.md into your project. Your agent can call knok natively — no install, no config.', dark: true },
+];
+
+const capabilities = [
+  { num: '01', title: 'Add action buttons', desc: 'Ask "Deploy or rollback?" and get the human\'s exact choice back. Your agent knows exactly what to do next.' },
+  { num: '02', title: 'Choose the urgency level', desc: 'Whisper barely nudges. Break takes over every screen. Four levels — your agent picks the one that fits the moment.' },
+  { num: '03', title: 'Make it speak', desc: 'Enable TTS and your agent literally reads the message out loud. No screen glance needed — pure audio interruption.' },
+  { num: '04', title: 'Set a timeout', desc: 'Tell knok to auto-dismiss after N seconds. If the human doesn\'t respond, your workflow keeps moving.' },
+  { num: '05', title: 'Cover every screen', desc: 'Break level blankets every connected display simultaneously. There\'s nowhere to look away.' },
+];
+---
+
+<Layout title="Knok — Native alert surface for AI agents">
+  <!-- Nav -->
+  <nav class="flex items-center justify-between h-[72px] px-8 lg:px-[120px] border-b-2 border-[var(--color-border)]">
+    <span class="text-[22px] font-bold">KNOK</span>
+    <div class="flex items-center gap-8">
+      <a href="https://github.com/TomasWard1/knok" target="_blank" class="flex items-center gap-1.5 border-2 border-[var(--color-border)] px-3 py-1.5 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors">
+        <span class="text-[var(--color-accent)]">★</span>
+        <span class="text-[14px] font-bold">STAR ON GITHUB</span>
+        <span class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-2 py-0.5">847</span>
+      </a>
+      <a href="#download" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-5 py-2.5 hover:brightness-110 transition">DOWNLOAD</a>
+    </div>
+  </nav>
+
+  <!-- Hero Bar -->
+  <div class="h-2 bg-[var(--color-accent)] w-full"></div>
+
+  <!-- Hero -->
+  <section class="px-8 lg:px-[120px] pt-20 pb-[72px] flex flex-col gap-5">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-0.5 bg-[var(--color-accent)]"></div>
+      <span class="text-[14px] font-bold">WHEN YOUR AGENT NEEDS YOU</span>
+    </div>
+    <h1 class="text-[clamp(64px,10vw,132px)] font-bold leading-[0.92]">BREAK<br/>THROUGH.</h1>
+    <p class="text-[17px] text-[var(--color-body-text)] leading-relaxed max-w-[600px]">
+      AI agents run in the background. When they need a decision, an approval, or just your attention — system notifications get ignored. Knok doesn't.
+    </p>
+    <div class="flex gap-4 flex-wrap">
+      <a href="#download" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-8 py-4 hover:brightness-110 transition">DOWNLOAD FOR MACOS</a>
+      <a href="https://github.com/TomasWard1/knok" target="_blank" class="border-2 border-[var(--color-border)] text-[14px] font-bold px-8 py-4 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors">VIEW ON GITHUB</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-[var(--color-accent)] text-[14px]">★</span>
+      <span class="text-[14px] font-medium text-[var(--color-fg-subtle)]">Open source · MIT license</span>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="h-1 bg-[var(--color-fg)] w-full"></div>
+
+  <!-- Four Levels of Urgency -->
+  <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
+    <div class="flex items-end gap-5">
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">01 /</span>
+      <h2 class="text-[clamp(28px,4vw,42px)] font-bold">FOUR LEVELS OF URGENCY</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-2 border-[var(--color-border)]">
+      {levels.map((level) => (
+        <div class:list={[
+          'flex flex-col gap-3.5 p-8 lg:border-r-2 lg:last:border-r-0 border-b-2 lg:border-b-0 last:border-b-0 border-[var(--color-border)]',
+          level.accent ? 'bg-[var(--color-accent)] text-[var(--color-accent-fg)]' : ''
+        ]}>
+          <span class:list={['text-[14px] font-bold', level.accent ? 'text-white' : 'text-[var(--color-accent)]']}>{level.num}</span>
+          <span class="text-[26px] font-bold">{level.name}</span>
+          <p class:list={['text-[14px] leading-relaxed', level.accent ? 'text-white' : 'text-[var(--color-fg-muted)]']}>{level.desc}</p>
+          <span class:list={['font-mono text-[14px] font-bold', level.accent ? 'text-white' : 'text-[var(--color-accent)]']}>{level.badge}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="h-1 bg-[var(--color-fg)] w-full"></div>
+
+  <!-- How It Works -->
+  <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
+    <div class="flex items-end gap-5">
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">02 /</span>
+      <h2 class="text-[clamp(28px,4vw,42px)] font-bold">HOW IT WORKS</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-[60px]">
+      {steps.map((step) => (
+        <div class="flex flex-col gap-3">
+          <span class="text-[14px] font-bold text-[var(--color-accent)]">{step.num}</span>
+          <h3 class="text-[22px] font-bold">{step.title}</h3>
+          <p class="text-[14px] text-[var(--color-fg-muted)] leading-relaxed">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="h-1 bg-[var(--color-fg)] w-full"></div>
+
+  <!-- How Your Agent Can Connect -->
+  <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
+    <div class="flex items-end gap-5">
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">03 /</span>
+      <h2 class="text-[clamp(28px,4vw,42px)] font-bold">HOW YOUR AGENT CAN CONNECT</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {integrations.map((item) => (
+        <div class:list={[
+          'flex flex-col gap-3 p-8',
+          item.dark
+            ? 'bg-[var(--color-bg-dark)] text-[var(--color-fg-on-dark)]'
+            : 'border-2 border-[var(--color-border)]'
+        ]}>
+          <span class="text-[14px] font-bold text-[var(--color-accent)]">{item.label}</span>
+          <span class:list={['text-[14px] font-medium', item.dark ? 'text-white' : '']}>{item.title}</span>
+          <p class:list={['text-[14px]', item.dark ? 'text-white/70' : 'text-[var(--color-fg-muted)]']}>{item.desc}</p>
+          {item.dark && (
+            <div class="mt-auto pt-4">
+              <span class="border border-white/25 text-[14px] font-bold px-3.5 py-2 inline-block">↓ DOWNLOAD SKILL.MD</span>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="h-1 bg-[var(--color-fg)] w-full"></div>
+
+  <!-- What Your Agent Can Do -->
+  <section class="px-8 lg:px-[120px] py-[72px] bg-[var(--color-bg-white)] flex flex-col gap-12">
+    <div class="flex items-end gap-5">
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">04 /</span>
+      <h2 class="text-[clamp(28px,4vw,48px)] font-black leading-[0.95]">WHAT YOUR<br/>AGENT CAN DO</h2>
+    </div>
+    <div class="flex flex-col">
+      {capabilities.map((cap) => (
+        <>
+          <div class="h-px bg-[var(--color-border-light)]"></div>
+          <div class="flex gap-8 md:gap-12 py-8">
+            <span class="text-[clamp(36px,5vw,56px)] font-black text-[var(--color-accent)] w-[100px] shrink-0">{cap.num}</span>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-[22px] font-bold">{cap.title}</h3>
+              <p class="text-[15px] text-[var(--color-fg-muted)] leading-relaxed">{cap.desc}</p>
+            </div>
+          </div>
+        </>
+      ))}
+      <div class="h-px bg-[var(--color-border-light)]"></div>
+    </div>
+  </section>
+
+  <!-- Accent Divider -->
+  <div class="h-2 bg-[var(--color-accent)] w-full"></div>
+
+  <!-- CTA -->
+  <section id="download" class="bg-[var(--color-bg-dark)] px-8 lg:px-[120px] py-20 flex flex-col gap-5">
+    <h2 class="text-[clamp(48px,7vw,80px)] font-bold text-[var(--color-fg-on-dark)] leading-[0.92]">YOUR AGENT<br/>IS WAITING.</h2>
+    <p class="text-[22px] font-bold text-[var(--color-accent)]">Give it a voice.</p>
+    <a href="https://github.com/TomasWard1/knok/releases" target="_blank" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-9 py-[18px] w-fit hover:brightness-110 transition">DOWNLOAD KNOK — FREE</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="flex items-center justify-between px-8 lg:px-[120px] py-7 border-t-2 border-[var(--color-border)]">
+    <span class="text-[16px] font-bold">KNOK</span>
+    <span class="text-[14px] font-bold text-[var(--color-fg-subtle)]">MIT LICENSE — OPEN SOURCE — 2025</span>
+  </footer>
+</Layout>
