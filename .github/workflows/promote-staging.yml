@@ -1,0 +1,42 @@
+name: Promote staging to main
+
+on:
+  push:
+    branches: [staging]
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if PR already exists
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          existing=$(gh pr list --base main --head staging --state open --json number --jq '.[0].number // empty')
+          echo "existing=$existing" >> "$GITHUB_OUTPUT"
+
+      - name: Create PR if none exists
+        if: steps.check.outputs.existing == ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base main \
+            --head staging \
+            --title "Promote staging to main" \
+            --body "Automated PR to promote \`staging\` changes to \`main\` (production)."
+
+      - name: Update existing PR
+        if: steps.check.outputs.existing != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "PR #${{ steps.check.outputs.existing }} already exists, nothing to do."
