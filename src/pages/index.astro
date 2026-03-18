@@ -223,8 +223,12 @@ const es = t.es;
           <span class:list={['text-[14px] font-medium', item.label === 'CLAUDE CODE SKILL' ? 'text-white' : '']} data-en={item.title} data-es={es.connect.items[i].title}>{item.title}</span>
           <p class:list={['text-[14px]', item.label === 'CLAUDE CODE SKILL' ? 'text-white/70' : 'text-[var(--color-fg-muted)]']} data-en={item.desc} data-es={es.connect.items[i].desc}>{item.desc}</p>
           {item.label === 'CLAUDE CODE SKILL' && (
-            <div class="mt-auto pt-4">
+            <div class="mt-auto pt-4 flex flex-col gap-2.5">
               <a href={SKILL_URL} download class="border border-white/25 text-[14px] font-bold px-3.5 py-2 inline-block hover:bg-white/10 transition">↓ DOWNLOAD SKILL.MD</a>
+              <div class="flex items-center gap-2">
+                <span class="text-white/40 text-[14px]" data-en="or" data-es="o">or</span>
+                <code class="bg-white/10 text-[13px] font-mono px-2.5 py-1.5 select-all">npx skills add TomasWard1/knok</code>
+              </div>
             </div>
           )}
         </div>
