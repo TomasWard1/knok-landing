@@ -133,7 +133,7 @@ const es = t.es;
         <span class="text-[14px] font-bold" data-en={en.nav.star} data-es={es.nav.star}>{en.nav.star}</span>
         <span class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-2 py-0.5" data-stars>0</span>
       </a>
-      <a href={RELEASE_URL} target="_blank" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-5 py-2.5 hover:brightness-110 transition" data-en={en.nav.download} data-es={es.nav.download}>{en.nav.download}</a>
+      <a href={RELEASE_URL} target="_blank" data-download class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-5 py-2.5 hover:brightness-110 transition" data-en={en.nav.download} data-es={es.nav.download}>{en.nav.download}</a>
     </div>
   </nav>
 
@@ -149,7 +149,7 @@ const es = t.es;
     <h1 class="text-[clamp(64px,10vw,132px)] font-bold leading-[0.92]" data-html-en={en.hero.headline} data-html-es={es.hero.headline} set:html={en.hero.headline} />
     <p class="text-[17px] text-[var(--color-body-text)] leading-relaxed max-w-[600px]" data-en={en.hero.sub} data-es={es.hero.sub}>{en.hero.sub}</p>
     <div class="flex gap-4 flex-wrap">
-      <a href={RELEASE_URL} target="_blank" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-8 py-4 hover:brightness-110 transition" data-en={en.hero.cta} data-es={es.hero.cta}>{en.hero.cta}</a>
+      <a href={RELEASE_URL} target="_blank" data-download class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-8 py-4 hover:brightness-110 transition" data-en={en.hero.cta} data-es={es.hero.cta}>{en.hero.cta}</a>
       <a href={REPO_URL} target="_blank" class="border-2 border-[var(--color-border)] text-[14px] font-bold px-8 py-4 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors" data-en={en.hero.secondary} data-es={es.hero.secondary}>{en.hero.secondary}</a>
     </div>
     <div class="flex items-center gap-3">
@@ -265,7 +265,7 @@ const es = t.es;
   <section id="download" class="bg-[var(--color-bg-dark)] px-8 lg:px-[120px] py-20 flex flex-col gap-5">
     <h2 class="text-[clamp(48px,7vw,80px)] font-bold text-[var(--color-fg-on-dark)] leading-[0.92]" data-html-en={en.cta.headline} data-html-es={es.cta.headline} set:html={en.cta.headline} />
     <p class="text-[22px] font-bold text-[var(--color-accent)]" data-en={en.cta.sub} data-es={es.cta.sub}>{en.cta.sub}</p>
-    <a href={RELEASE_URL} target="_blank" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-9 py-[18px] w-fit hover:brightness-110 transition" data-en={en.cta.btn} data-es={es.cta.btn}>{en.cta.btn}</a>
+    <a href={RELEASE_URL} target="_blank" data-download class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-9 py-[18px] w-fit hover:brightness-110 transition" data-en={en.cta.btn} data-es={es.cta.btn}>{en.cta.btn}</a>
   </section>
 
   <!-- Footer -->
@@ -283,6 +283,19 @@ const es = t.es;
       document.querySelectorAll('[data-stars]').forEach(el => {
         el.textContent = String(d.stargazers_count ?? 0);
       });
+    })
+    .catch(() => {});
+
+  // Resolve latest DMG download URL
+  fetch('https://api.github.com/repos/TomasWard1/knok/releases/latest')
+    .then(r => r.json())
+    .then(d => {
+      const dmg = d.assets?.find(a => a.name.endsWith('.dmg'));
+      if (dmg) {
+        document.querySelectorAll('[data-download]').forEach(el => {
+          el.href = dmg.browser_download_url;
+        });
+      }
     })
     .catch(() => {});
 
