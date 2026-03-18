@@ -4,9 +4,10 @@ interface Props {
   description?: string;
 }
 
-const SITE_URL = 'https://knok.app';
+const siteUrl = Astro.site?.origin ?? 'https://knokknok.vercel.app';
 const { title, description = 'Let your AI agent interrupt you. Break through Do Not Disturb on macOS.' } = Astro.props;
-const ogImage = `${SITE_URL}/images/og-banner.png`;
+const ogImage = `${siteUrl}/images/og-banner.png`;
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 ---
 
 <!doctype html>
@@ -20,11 +21,11 @@ const ogImage = `${SITE_URL}/images/og-banner.png`;
     <meta name="description" content={description} />
     <meta name="author" content="Tomas Ward" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={SITE_URL} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
