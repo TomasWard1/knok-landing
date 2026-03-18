@@ -2,46 +2,138 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/globals.css';
 
-const levels = [
-  { num: '01', name: 'WHISPER', desc: 'A gentle tap. Something happened and your agent wants you to know. No action needed.', badge: 'fades away on its own', accent: false },
-  { num: '02', name: 'NUDGE', desc: 'A banner that waits. Your agent needs an answer before it can move forward.', badge: 'waits for your response', accent: false },
-  { num: '03', name: 'KNOCK', desc: 'This one has sound. Your agent is blocked and needs you now. Appears over everything.', badge: 'loud · stays on top', accent: false },
-  { num: '04', name: 'BREAK', desc: 'Full screen. Every display. Nothing works until you respond. For when it really cannot wait.', badge: 'full-screen takeover', accent: true },
-];
+const REPO = 'TomasWard1/knok';
+const SKILL_URL = `https://raw.githubusercontent.com/${REPO}/main/SKILL.md`;
+const RELEASE_URL = `https://github.com/${REPO}/releases/latest`;
+const REPO_URL = `https://github.com/${REPO}`;
 
-const steps = [
-  { num: 'STEP 01', title: 'YOUR AGENT HITS A WALL', desc: "It needs a decision, an approval, a human call. And it has no reliable way to reach you. Notifications get swallowed. DND wins." },
-  { num: 'STEP 02', title: 'KNOK BREAKS THROUGH', desc: "A native macOS window appears at whatever urgency level the agent chose. Do Not Disturb doesn't touch it. Focus mode ignores it. It just shows up." },
-  { num: 'STEP 03', title: 'YOU RESPOND. IT CONTINUES.', desc: "Click a button. Your agent gets the answer and keeps going. No emails, no Slack, no checking a dashboard." },
-];
+const t = {
+  en: {
+    nav: { star: 'STAR ON GITHUB', download: 'DOWNLOAD' },
+    hero: {
+      eyebrow: 'WHEN YOUR AGENT NEEDS YOU',
+      headline: 'BREAK<br/>THROUGH.',
+      sub: 'Your AI agent has no way to interrupt you. System notifications get ignored. DND wins. Knok doesn\'t care.',
+      cta: 'DOWNLOAD FOR MACOS',
+      secondary: 'VIEW ON GITHUB',
+      proof: 'Open source · MIT license',
+    },
+    levels: {
+      label: '01 /', title: 'FOUR LEVELS OF URGENCY',
+      items: [
+        { num: '01', name: 'WHISPER', desc: 'A quiet notification. No response needed.', badge: 'fades on its own' },
+        { num: '02', name: 'NUDGE', desc: 'A banner that stays until you respond.', badge: 'waits for you' },
+        { num: '03', name: 'KNOCK', desc: 'Sound + overlay. Your agent needs you now.', badge: 'loud · on top' },
+        { num: '04', name: 'BREAK', desc: 'Full-screen takeover. Every display. Must respond.', badge: 'total takeover' },
+      ],
+    },
+    how: {
+      label: '02 /', title: 'HOW IT WORKS',
+      steps: [
+        { num: 'STEP 01', title: 'AGENT HITS A WALL', desc: 'It needs a decision. System notifications get swallowed. DND blocks everything.' },
+        { num: 'STEP 02', title: 'KNOK BREAKS THROUGH', desc: 'A native macOS window appears. Bypasses DND, Focus mode, and full-screen apps.' },
+        { num: 'STEP 03', title: 'YOU RESPOND. IT CONTINUES.', desc: 'Click a button. Your agent gets the answer and keeps going.' },
+      ],
+    },
+    connect: {
+      label: '03 /', title: 'HOW YOUR AGENT CAN CONNECT',
+      items: [
+        { label: 'MCP SERVER', title: 'Claude Code · Cursor', desc: 'One line in your MCP config. Your agent calls knok like any other tool.' },
+        { label: 'CLI', title: 'Any script, any language', desc: 'Run knok from bash, Python, or Node. Exit code tells you what was clicked.' },
+        { label: 'UNIX SOCKET', title: 'Direct integration', desc: 'Send JSON, get the human\'s response. Any language that speaks sockets.' },
+        { label: 'CLAUDE CODE SKILL', title: 'Drop-in skill file', desc: 'Drop SKILL.md into your project. No install, no config.' },
+      ],
+    },
+    capabilities: {
+      label: '04 /', title: 'WHAT YOUR<br/>AGENT CAN DO',
+      items: [
+        { num: '01', title: 'Add action buttons', desc: 'Give humans choices. Get their exact answer back as a string.' },
+        { num: '02', title: 'Choose the urgency', desc: 'Four levels — from a quiet tap to full-screen takeover.' },
+        { num: '03', title: 'Make it speak', desc: 'TTS reads your message out loud. Pure audio interruption.' },
+        { num: '04', title: 'Set a timeout', desc: 'Auto-dismiss after N seconds. Workflow keeps moving.' },
+        { num: '05', title: 'Cover every screen', desc: 'Break level blankets all connected displays.' },
+      ],
+    },
+    cta: {
+      headline: 'YOUR AGENT<br/>IS WAITING.',
+      sub: 'Give it a voice.',
+      btn: 'DOWNLOAD KNOK — FREE',
+    },
+    footer: { right: 'MIT LICENSE — OPEN SOURCE — 2025' },
+    langToggle: 'ES',
+  },
+  es: {
+    nav: { star: 'STAR EN GITHUB', download: 'DESCARGAR' },
+    hero: {
+      eyebrow: 'CUANDO TU AGENTE TE NECESITA',
+      headline: 'BREAK<br/>THROUGH.',
+      sub: 'Tu agente de IA no tiene forma de interrumpirte. Las notificaciones se ignoran. No Molestar gana. A Knok le da igual.',
+      cta: 'DESCARGAR PARA MACOS',
+      secondary: 'VER EN GITHUB',
+      proof: 'Open source · Licencia MIT',
+    },
+    levels: {
+      label: '01 /', title: 'CUATRO NIVELES DE URGENCIA',
+      items: [
+        { num: '01', name: 'WHISPER', desc: 'Una notificación sutil. No requiere respuesta.', badge: 'se desvanece sola' },
+        { num: '02', name: 'NUDGE', desc: 'Un banner que espera hasta que respondas.', badge: 'espera tu respuesta' },
+        { num: '03', name: 'KNOCK', desc: 'Sonido + overlay. Tu agente te necesita ya.', badge: 'fuerte · encima de todo' },
+        { num: '04', name: 'BREAK', desc: 'Pantalla completa. Todos los monitores. Obligatorio responder.', badge: 'takeover total' },
+      ],
+    },
+    how: {
+      label: '02 /', title: 'CÓMO FUNCIONA',
+      steps: [
+        { num: 'PASO 01', title: 'TU AGENTE SE TRABA', desc: 'Necesita una decisión. Las notificaciones se pierden. No Molestar bloquea todo.' },
+        { num: 'PASO 02', title: 'KNOK ATRAVIESA', desc: 'Una ventana nativa de macOS aparece. Ignora No Molestar, Focus, y apps en pantalla completa.' },
+        { num: 'PASO 03', title: 'RESPONDÉS. SIGUE.', desc: 'Hacés click en un botón. Tu agente recibe la respuesta y continúa.' },
+      ],
+    },
+    connect: {
+      label: '03 /', title: 'CÓMO SE CONECTA TU AGENTE',
+      items: [
+        { label: 'MCP SERVER', title: 'Claude Code · Cursor', desc: 'Una línea en tu config MCP. Tu agente usa knok como cualquier herramienta.' },
+        { label: 'CLI', title: 'Cualquier script, cualquier lenguaje', desc: 'Corré knok desde bash, Python o Node. El exit code dice qué se clickeó.' },
+        { label: 'UNIX SOCKET', title: 'Integración directa', desc: 'Mandá JSON, recibí la respuesta. Cualquier lenguaje que hable sockets.' },
+        { label: 'CLAUDE CODE SKILL', title: 'Archivo skill drop-in', desc: 'Tirá SKILL.md en tu proyecto. Sin instalar, sin configurar.' },
+      ],
+    },
+    capabilities: {
+      label: '04 /', title: 'QUÉ PUEDE HACER<br/>TU AGENTE',
+      items: [
+        { num: '01', title: 'Agregar botones de acción', desc: 'Dale opciones al humano. Recibí su respuesta exacta como string.' },
+        { num: '02', title: 'Elegir la urgencia', desc: 'Cuatro niveles — de un tap sutil a takeover de pantalla completa.' },
+        { num: '03', title: 'Hacerlo hablar', desc: 'TTS lee tu mensaje en voz alta. Interrupción por audio.' },
+        { num: '04', title: 'Poner un timeout', desc: 'Auto-dismiss después de N segundos. El workflow sigue.' },
+        { num: '05', title: 'Cubrir cada pantalla', desc: 'Break cubre todos los monitores conectados.' },
+      ],
+    },
+    cta: {
+      headline: 'TU AGENTE<br/>ESTÁ ESPERANDO.',
+      sub: 'Dale voz.',
+      btn: 'DESCARGAR KNOK — GRATIS',
+    },
+    footer: { right: 'LICENCIA MIT — OPEN SOURCE — 2025' },
+    langToggle: 'EN',
+  },
+};
 
-const integrations = [
-  { label: 'MCP SERVER', title: 'Claude Code · Cursor', desc: 'One line in your MCP settings. Your agent calls knok like any other tool — no extra code.', dark: false },
-  { label: 'CLI', title: 'Any script, any language', desc: 'Run knok from bash, Python, Node, or any cron job. Exit code tells you which button was clicked.', dark: false },
-  { label: 'UNIX SOCKET', title: 'Direct integration', desc: 'Send JSON, get the human\'s response. Works from any language that speaks sockets.', dark: false },
-  { label: 'CLAUDE CODE SKILL', title: 'Drop-in skill file', desc: 'Drop SKILL.md into your project. Your agent can call knok natively — no install, no config.', dark: true },
-];
-
-const capabilities = [
-  { num: '01', title: 'Add action buttons', desc: 'Ask "Deploy or rollback?" and get the human\'s exact choice back. Your agent knows exactly what to do next.' },
-  { num: '02', title: 'Choose the urgency level', desc: 'Whisper barely nudges. Break takes over every screen. Four levels — your agent picks the one that fits the moment.' },
-  { num: '03', title: 'Make it speak', desc: 'Enable TTS and your agent literally reads the message out loud. No screen glance needed — pure audio interruption.' },
-  { num: '04', title: 'Set a timeout', desc: 'Tell knok to auto-dismiss after N seconds. If the human doesn\'t respond, your workflow keeps moving.' },
-  { num: '05', title: 'Cover every screen', desc: 'Break level blankets every connected display simultaneously. There\'s nowhere to look away.' },
-];
+const en = t.en;
+const es = t.es;
 ---
 
 <Layout title="Knok — Native alert surface for AI agents">
   <!-- Nav -->
   <nav class="flex items-center justify-between h-[72px] px-8 lg:px-[120px] border-b-2 border-[var(--color-border)]">
     <span class="text-[22px] font-bold">KNOK</span>
-    <div class="flex items-center gap-8">
-      <a href="https://github.com/TomasWard1/knok" target="_blank" class="flex items-center gap-1.5 border-2 border-[var(--color-border)] px-3 py-1.5 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors">
+    <div class="flex items-center gap-4 md:gap-8">
+      <button id="lang-toggle" class="text-[14px] font-bold border-2 border-[var(--color-border)] px-3 py-1.5 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors cursor-pointer" data-en={en.langToggle} data-es={es.langToggle}>{en.langToggle}</button>
+      <a href={REPO_URL} target="_blank" class="hidden md:flex items-center gap-1.5 border-2 border-[var(--color-border)] px-3 py-1.5 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors">
         <span class="text-[var(--color-accent)]">★</span>
-        <span class="text-[14px] font-bold">STAR ON GITHUB</span>
-        <span class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-2 py-0.5">847</span>
+        <span class="text-[14px] font-bold" data-en={en.nav.star} data-es={es.nav.star}>{en.nav.star}</span>
+        <span class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-2 py-0.5" data-stars>0</span>
       </a>
-      <a href="#download" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-5 py-2.5 hover:brightness-110 transition">DOWNLOAD</a>
+      <a href={RELEASE_URL} target="_blank" data-download class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-5 py-2.5 hover:brightness-110 transition" data-en={en.nav.download} data-es={es.nav.download}>{en.nav.download}</a>
     </div>
   </nav>
 
@@ -52,19 +144,17 @@ const capabilities = [
   <section class="px-8 lg:px-[120px] pt-20 pb-[72px] flex flex-col gap-5">
     <div class="flex items-center gap-3">
       <div class="w-8 h-0.5 bg-[var(--color-accent)]"></div>
-      <span class="text-[14px] font-bold">WHEN YOUR AGENT NEEDS YOU</span>
+      <span class="text-[14px] font-bold" data-en={en.hero.eyebrow} data-es={es.hero.eyebrow}>{en.hero.eyebrow}</span>
     </div>
-    <h1 class="text-[clamp(64px,10vw,132px)] font-bold leading-[0.92]">BREAK<br/>THROUGH.</h1>
-    <p class="text-[17px] text-[var(--color-body-text)] leading-relaxed max-w-[600px]">
-      AI agents run in the background. When they need a decision, an approval, or just your attention — system notifications get ignored. Knok doesn't.
-    </p>
+    <h1 class="text-[clamp(64px,10vw,132px)] font-bold leading-[0.92]" data-html-en={en.hero.headline} data-html-es={es.hero.headline} set:html={en.hero.headline} />
+    <p class="text-[17px] text-[var(--color-body-text)] leading-relaxed max-w-[600px]" data-en={en.hero.sub} data-es={es.hero.sub}>{en.hero.sub}</p>
     <div class="flex gap-4 flex-wrap">
-      <a href="#download" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-8 py-4 hover:brightness-110 transition">DOWNLOAD FOR MACOS</a>
-      <a href="https://github.com/TomasWard1/knok" target="_blank" class="border-2 border-[var(--color-border)] text-[14px] font-bold px-8 py-4 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors">VIEW ON GITHUB</a>
+      <a href={RELEASE_URL} target="_blank" data-download class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-8 py-4 hover:brightness-110 transition" data-en={en.hero.cta} data-es={es.hero.cta}>{en.hero.cta}</a>
+      <a href={REPO_URL} target="_blank" class="border-2 border-[var(--color-border)] text-[14px] font-bold px-8 py-4 hover:bg-[var(--color-fg)] hover:text-[var(--color-fg-on-dark)] transition-colors" data-en={en.hero.secondary} data-es={es.hero.secondary}>{en.hero.secondary}</a>
     </div>
     <div class="flex items-center gap-3">
       <span class="text-[var(--color-accent)] text-[14px]">★</span>
-      <span class="text-[14px] font-medium text-[var(--color-fg-subtle)]">Open source · MIT license</span>
+      <span class="text-[14px] font-medium text-[var(--color-fg-subtle)]" data-en={en.hero.proof} data-es={es.hero.proof}>{en.hero.proof}</span>
     </div>
   </section>
 
@@ -74,19 +164,19 @@ const capabilities = [
   <!-- Four Levels of Urgency -->
   <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
     <div class="flex items-end gap-5">
-      <span class="text-[14px] font-bold text-[var(--color-accent)]">01 /</span>
-      <h2 class="text-[clamp(28px,4vw,42px)] font-bold">FOUR LEVELS OF URGENCY</h2>
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">{en.levels.label}</span>
+      <h2 class="text-[clamp(28px,4vw,42px)] font-bold" data-en={en.levels.title} data-es={es.levels.title}>{en.levels.title}</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-2 border-[var(--color-border)]">
-      {levels.map((level) => (
+      {en.levels.items.map((level, i) => (
         <div class:list={[
           'flex flex-col gap-3.5 p-8 lg:border-r-2 lg:last:border-r-0 border-b-2 lg:border-b-0 last:border-b-0 border-[var(--color-border)]',
-          level.accent ? 'bg-[var(--color-accent)] text-[var(--color-accent-fg)]' : ''
+          level.num === '04' ? 'bg-[var(--color-accent)] text-[var(--color-accent-fg)]' : ''
         ]}>
-          <span class:list={['text-[14px] font-bold', level.accent ? 'text-white' : 'text-[var(--color-accent)]']}>{level.num}</span>
+          <span class:list={['text-[14px] font-bold', level.num === '04' ? 'text-white' : 'text-[var(--color-accent)]']}>{level.num}</span>
           <span class="text-[26px] font-bold">{level.name}</span>
-          <p class:list={['text-[14px] leading-relaxed', level.accent ? 'text-white' : 'text-[var(--color-fg-muted)]']}>{level.desc}</p>
-          <span class:list={['font-mono text-[14px] font-bold', level.accent ? 'text-white' : 'text-[var(--color-accent)]']}>{level.badge}</span>
+          <p class:list={['text-[14px] leading-relaxed', level.num === '04' ? 'text-white' : 'text-[var(--color-fg-muted)]']} data-en={level.desc} data-es={es.levels.items[i].desc}>{level.desc}</p>
+          <span class:list={['font-mono text-[14px] font-bold', level.num === '04' ? 'text-white' : 'text-[var(--color-accent)]']} data-en={level.badge} data-es={es.levels.items[i].badge}>{level.badge}</span>
         </div>
       ))}
     </div>
@@ -98,15 +188,15 @@ const capabilities = [
   <!-- How It Works -->
   <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
     <div class="flex items-end gap-5">
-      <span class="text-[14px] font-bold text-[var(--color-accent)]">02 /</span>
-      <h2 class="text-[clamp(28px,4vw,42px)] font-bold">HOW IT WORKS</h2>
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">{en.how.label}</span>
+      <h2 class="text-[clamp(28px,4vw,42px)] font-bold" data-en={en.how.title} data-es={es.how.title}>{en.how.title}</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-[60px]">
-      {steps.map((step) => (
+      {en.how.steps.map((step, i) => (
         <div class="flex flex-col gap-3">
-          <span class="text-[14px] font-bold text-[var(--color-accent)]">{step.num}</span>
-          <h3 class="text-[22px] font-bold">{step.title}</h3>
-          <p class="text-[14px] text-[var(--color-fg-muted)] leading-relaxed">{step.desc}</p>
+          <span class="text-[14px] font-bold text-[var(--color-accent)]" data-en={step.num} data-es={es.how.steps[i].num}>{step.num}</span>
+          <h3 class="text-[22px] font-bold" data-en={step.title} data-es={es.how.steps[i].title}>{step.title}</h3>
+          <p class="text-[14px] text-[var(--color-fg-muted)] leading-relaxed" data-en={step.desc} data-es={es.how.steps[i].desc}>{step.desc}</p>
         </div>
       ))}
     </div>
@@ -118,23 +208,23 @@ const capabilities = [
   <!-- How Your Agent Can Connect -->
   <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
     <div class="flex items-end gap-5">
-      <span class="text-[14px] font-bold text-[var(--color-accent)]">03 /</span>
-      <h2 class="text-[clamp(28px,4vw,42px)] font-bold">HOW YOUR AGENT CAN CONNECT</h2>
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">{en.connect.label}</span>
+      <h2 class="text-[clamp(28px,4vw,42px)] font-bold" data-en={en.connect.title} data-es={es.connect.title}>{en.connect.title}</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {integrations.map((item) => (
+      {en.connect.items.map((item, i) => (
         <div class:list={[
           'flex flex-col gap-3 p-8',
-          item.dark
+          item.label === 'CLAUDE CODE SKILL'
             ? 'bg-[var(--color-bg-dark)] text-[var(--color-fg-on-dark)]'
             : 'border-2 border-[var(--color-border)]'
         ]}>
           <span class="text-[14px] font-bold text-[var(--color-accent)]">{item.label}</span>
-          <span class:list={['text-[14px] font-medium', item.dark ? 'text-white' : '']}>{item.title}</span>
-          <p class:list={['text-[14px]', item.dark ? 'text-white/70' : 'text-[var(--color-fg-muted)]']}>{item.desc}</p>
-          {item.dark && (
+          <span class:list={['text-[14px] font-medium', item.label === 'CLAUDE CODE SKILL' ? 'text-white' : '']} data-en={item.title} data-es={es.connect.items[i].title}>{item.title}</span>
+          <p class:list={['text-[14px]', item.label === 'CLAUDE CODE SKILL' ? 'text-white/70' : 'text-[var(--color-fg-muted)]']} data-en={item.desc} data-es={es.connect.items[i].desc}>{item.desc}</p>
+          {item.label === 'CLAUDE CODE SKILL' && (
             <div class="mt-auto pt-4">
-              <span class="border border-white/25 text-[14px] font-bold px-3.5 py-2 inline-block">↓ DOWNLOAD SKILL.MD</span>
+              <a href={SKILL_URL} download class="border border-white/25 text-[14px] font-bold px-3.5 py-2 inline-block hover:bg-white/10 transition">↓ DOWNLOAD SKILL.MD</a>
             </div>
           )}
         </div>
@@ -148,18 +238,18 @@ const capabilities = [
   <!-- What Your Agent Can Do -->
   <section class="px-8 lg:px-[120px] py-[72px] bg-[var(--color-bg-white)] flex flex-col gap-12">
     <div class="flex items-end gap-5">
-      <span class="text-[14px] font-bold text-[var(--color-accent)]">04 /</span>
-      <h2 class="text-[clamp(28px,4vw,48px)] font-black leading-[0.95]">WHAT YOUR<br/>AGENT CAN DO</h2>
+      <span class="text-[14px] font-bold text-[var(--color-accent)]">{en.capabilities.label}</span>
+      <h2 class="text-[clamp(28px,4vw,48px)] font-black leading-[0.95]" data-html-en={en.capabilities.title} data-html-es={es.capabilities.title} set:html={en.capabilities.title} />
     </div>
     <div class="flex flex-col">
-      {capabilities.map((cap) => (
+      {en.capabilities.items.map((cap, i) => (
         <>
           <div class="h-px bg-[var(--color-border-light)]"></div>
           <div class="flex gap-8 md:gap-12 py-8">
             <span class="text-[clamp(36px,5vw,56px)] font-black text-[var(--color-accent)] w-[100px] shrink-0">{cap.num}</span>
             <div class="flex flex-col gap-2">
-              <h3 class="text-[22px] font-bold">{cap.title}</h3>
-              <p class="text-[15px] text-[var(--color-fg-muted)] leading-relaxed">{cap.desc}</p>
+              <h3 class="text-[22px] font-bold" data-en={cap.title} data-es={es.capabilities.items[i].title}>{cap.title}</h3>
+              <p class="text-[15px] text-[var(--color-fg-muted)] leading-relaxed" data-en={cap.desc} data-es={es.capabilities.items[i].desc}>{cap.desc}</p>
             </div>
           </div>
         </>
@@ -173,14 +263,59 @@ const capabilities = [
 
   <!-- CTA -->
   <section id="download" class="bg-[var(--color-bg-dark)] px-8 lg:px-[120px] py-20 flex flex-col gap-5">
-    <h2 class="text-[clamp(48px,7vw,80px)] font-bold text-[var(--color-fg-on-dark)] leading-[0.92]">YOUR AGENT<br/>IS WAITING.</h2>
-    <p class="text-[22px] font-bold text-[var(--color-accent)]">Give it a voice.</p>
-    <a href="https://github.com/TomasWard1/knok/releases" target="_blank" class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-9 py-[18px] w-fit hover:brightness-110 transition">DOWNLOAD KNOK — FREE</a>
+    <h2 class="text-[clamp(48px,7vw,80px)] font-bold text-[var(--color-fg-on-dark)] leading-[0.92]" data-html-en={en.cta.headline} data-html-es={es.cta.headline} set:html={en.cta.headline} />
+    <p class="text-[22px] font-bold text-[var(--color-accent)]" data-en={en.cta.sub} data-es={es.cta.sub}>{en.cta.sub}</p>
+    <a href={RELEASE_URL} target="_blank" data-download class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-9 py-[18px] w-fit hover:brightness-110 transition" data-en={en.cta.btn} data-es={es.cta.btn}>{en.cta.btn}</a>
   </section>
 
   <!-- Footer -->
   <footer class="flex items-center justify-between px-8 lg:px-[120px] py-7 border-t-2 border-[var(--color-border)]">
     <span class="text-[16px] font-bold">KNOK</span>
-    <span class="text-[14px] font-bold text-[var(--color-fg-subtle)]">MIT LICENSE — OPEN SOURCE — 2025</span>
+    <span class="text-[14px] font-bold text-[var(--color-fg-subtle)]" data-en={en.footer.right} data-es={es.footer.right}>{en.footer.right}</span>
   </footer>
 </Layout>
+
+<script is:inline>
+  // GitHub stars
+  fetch('https://api.github.com/repos/TomasWard1/knok')
+    .then(r => r.json())
+    .then(d => {
+      document.querySelectorAll('[data-stars]').forEach(el => {
+        el.textContent = String(d.stargazers_count ?? 0);
+      });
+    })
+    .catch(() => {});
+
+  // Resolve latest DMG download URL
+  fetch('https://api.github.com/repos/TomasWard1/knok/releases/latest')
+    .then(r => r.json())
+    .then(d => {
+      const dmg = d.assets?.find(a => a.name.endsWith('.dmg'));
+      if (dmg) {
+        document.querySelectorAll('[data-download]').forEach(el => {
+          el.href = dmg.browser_download_url;
+        });
+      }
+    })
+    .catch(() => {});
+
+  // i18n toggle
+  const lang = localStorage.getItem('knok-lang') || 'en';
+  if (lang === 'es') applyLang('es');
+
+  document.getElementById('lang-toggle')?.addEventListener('click', () => {
+    const current = localStorage.getItem('knok-lang') || 'en';
+    const next = current === 'en' ? 'es' : 'en';
+    localStorage.setItem('knok-lang', next);
+    applyLang(next);
+  });
+
+  function applyLang(l) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + l);
+    });
+    document.querySelectorAll('[data-html-en]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-html-' + l);
+    });
+  }
+</script>
