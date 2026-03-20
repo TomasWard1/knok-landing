@@ -12,7 +12,7 @@ const t = {
     nav: { star: 'STAR ON GITHUB', download: 'DOWNLOAD' },
     hero: {
       eyebrow: 'WHEN YOUR AGENT NEEDS YOU',
-      headline: 'LET YOUR AI AGENT<br/>INTERRUPT YOU.',
+      headline: 'LET YOUR AI AGENT<br/><span class="text-[var(--color-accent)]">INTERRUPT</span> YOU.',
       sub: 'Your AI agent has no way to interrupt you. System notifications get ignored. DND wins. Knok doesn\'t care.',
       cta: 'DOWNLOAD FOR MACOS',
       secondary: 'VIEW ON GITHUB',
@@ -38,7 +38,7 @@ const t = {
     connect: {
       label: '03 /', title: 'HOW YOUR AGENT CAN CONNECT',
       items: [
-        { label: 'MCP SERVER', title: 'Claude Code · Cursor', desc: 'One line in your MCP config. Your agent calls knok like any other tool.' },
+        { label: 'MCP SERVER', title: 'Claude Code · Cursor · Codex', desc: 'One line in your MCP config. Your agent calls knok like any other tool.' },
         { label: 'CLI', title: 'Any script, any language', desc: 'Run knok from bash, Python, or Node. Exit code tells you what was clicked.' },
         { label: 'UNIX SOCKET', title: 'Direct integration', desc: 'Send JSON, get the human\'s response. Any language that speaks sockets.' },
         { label: 'CLAUDE CODE SKILL', title: 'Drop-in skill file', desc: 'Drop SKILL.md into your project. No install, no config.' },
@@ -54,6 +54,23 @@ const t = {
         { num: '05', title: 'Cover every screen', desc: 'Break level blankets all connected displays.' },
       ],
     },
+    useCases: {
+      label: '05 /', title: 'USE CASES',
+      sub: 'Your agent is autonomous. Knok is how it reaches you.',
+      items: [
+        { name: 'SLACK', desc: 'Your agent reads your messages, detects something urgent, and escalates to a real interruption instead of another unread notification.' },
+        { name: 'EMAIL', desc: 'Your agent triages your inbox. When something actually matters, it doesn\'t send you another email — it knocks.' },
+        { name: 'CALENDAR', desc: 'Your agent sees your next meeting starts in 2 minutes. You\'re in Focus mode. It breaks through anyway.' },
+      ],
+    },
+    integrations: {
+      label: '06 /', title: 'INTEGRATIONS',
+      sub: 'Webhooks and scripts that route events straight to Knok.',
+      items: [
+        { name: 'GITHUB', desc: 'PR opened, CI failed, review requested — GitHub sends a webhook, Knok turns it into an interruption.', badge: 'LIVE' },
+        { name: 'VERCEL', desc: 'Deploy failed, build error, preview broken — Vercel fires an event, Knok delivers it at the right urgency.', badge: 'COMING SOON' },
+      ],
+    },
     cta: {
       headline: 'YOUR AGENT<br/>IS WAITING.',
       sub: 'Give it a voice.',
@@ -66,7 +83,7 @@ const t = {
     nav: { star: 'STAR EN GITHUB', download: 'DESCARGAR' },
     hero: {
       eyebrow: 'CUANDO TU AGENTE TE NECESITA',
-      headline: 'DEJÁ QUE TU AGENTE<br/>TE INTERRUMPA.',
+      headline: 'DEJÁ QUE TU AGENTE<br/>TE <span class="text-[var(--color-accent)]">INTERRUMPA</span>.',
       sub: 'Tu agente de IA no tiene forma de interrumpirte. Las notificaciones se ignoran. No Molestar gana. A Knok le da igual.',
       cta: 'DESCARGAR PARA MACOS',
       secondary: 'VER EN GITHUB',
@@ -92,7 +109,7 @@ const t = {
     connect: {
       label: '03 /', title: 'CÓMO SE CONECTA TU AGENTE',
       items: [
-        { label: 'MCP SERVER', title: 'Claude Code · Cursor', desc: 'Una línea en tu config MCP. Tu agente usa knok como cualquier herramienta.' },
+        { label: 'MCP SERVER', title: 'Claude Code · Cursor · Codex', desc: 'Una línea en tu config MCP. Tu agente usa knok como cualquier herramienta.' },
         { label: 'CLI', title: 'Cualquier script, cualquier lenguaje', desc: 'Corré knok desde bash, Python o Node. El exit code dice qué se clickeó.' },
         { label: 'UNIX SOCKET', title: 'Integración directa', desc: 'Mandá JSON, recibí la respuesta. Cualquier lenguaje que hable sockets.' },
         { label: 'CLAUDE CODE SKILL', title: 'Archivo skill drop-in', desc: 'Tirá SKILL.md en tu proyecto. Sin instalar, sin configurar.' },
@@ -106,6 +123,23 @@ const t = {
         { num: '03', title: 'Hacerlo hablar', desc: 'TTS lee tu mensaje en voz alta. Interrupción por audio.' },
         { num: '04', title: 'Poner un timeout', desc: 'Auto-dismiss después de N segundos. El workflow sigue.' },
         { num: '05', title: 'Cubrir cada pantalla', desc: 'Break cubre todos los monitores conectados.' },
+      ],
+    },
+    useCases: {
+      label: '05 /', title: 'CASOS DE USO',
+      sub: 'Tu agente es autónomo. Knok es cómo te alcanza.',
+      items: [
+        { name: 'SLACK', desc: 'Tu agente lee tus mensajes, detecta algo urgente y escala a una interrupción real en vez de otra notificación sin leer.' },
+        { name: 'EMAIL', desc: 'Tu agente triagea tu inbox. Cuando algo realmente importa, no te manda otro mail — te interrumpe.' },
+        { name: 'CALENDAR', desc: 'Tu agente ve que tu próxima reunión arranca en 2 minutos. Estás en Focus mode. Atraviesa igual.' },
+      ],
+    },
+    integrations: {
+      label: '06 /', title: 'INTEGRACIONES',
+      sub: 'Webhooks y scripts que rutean eventos directo a Knok.',
+      items: [
+        { name: 'GITHUB', desc: 'PR abierto, CI falló, review pedido — GitHub manda un webhook, Knok lo convierte en una interrupción.', badge: 'ACTIVA' },
+        { name: 'VERCEL', desc: 'Deploy falló, error de build, preview rota — Vercel dispara un evento, Knok lo entrega con la urgencia correcta.', badge: 'PRÓXIMAMENTE' },
       ],
     },
     cta: {
@@ -151,7 +185,7 @@ const es = t.es;
       <div class="w-8 h-0.5 bg-[var(--color-accent)]"></div>
       <span class="text-[14px] font-bold" data-en={en.hero.eyebrow} data-es={es.hero.eyebrow}>{en.hero.eyebrow}</span>
     </div>
-    <h1 class="text-[clamp(64px,10vw,132px)] font-bold leading-[0.92]" data-html-en={en.hero.headline} data-html-es={es.hero.headline} set:html={en.hero.headline} />
+    <h1 class="text-[clamp(56px,8vw,100px)] font-bold leading-[0.92]" data-html-en={en.hero.headline} data-html-es={es.hero.headline} set:html={en.hero.headline} />
     <p class="text-[17px] text-[var(--color-body-text)] leading-relaxed max-w-[600px]" data-en={en.hero.sub} data-es={es.hero.sub}>{en.hero.sub}</p>
     <div class="flex gap-4 flex-wrap">
       <a href={RELEASE_URL} target="_blank" data-download class="bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-[14px] font-bold px-8 py-4 hover:brightness-110 transition" data-en={en.hero.cta} data-es={es.hero.cta}>{en.hero.cta}</a>
@@ -264,6 +298,61 @@ const es = t.es;
         </>
       ))}
       <div class="h-px bg-[var(--color-border-light)]"></div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="h-1 bg-[var(--color-fg)] w-full"></div>
+
+  <!-- Use Cases -->
+  <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-end gap-5">
+        <span class="text-[14px] font-bold text-[var(--color-accent)]">{en.useCases.label}</span>
+        <h2 class="text-[clamp(28px,4vw,42px)] font-bold" data-en={en.useCases.title} data-es={es.useCases.title}>{en.useCases.title}</h2>
+      </div>
+      <p class="text-[15px] text-[var(--color-fg-muted)]" data-en={en.useCases.sub} data-es={es.useCases.sub}>{en.useCases.sub}</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {en.useCases.items.map((item, i) => (
+        <div class="flex flex-col gap-4 p-8 bg-[var(--color-bg-dark)] text-[var(--color-fg-on-dark)]">
+          <span class="text-[22px] font-bold">{item.name}</span>
+          <p class="text-[14px] text-white/70 leading-relaxed" data-en={item.desc} data-es={es.useCases.items[i].desc}>{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="h-1 bg-[var(--color-fg)] w-full"></div>
+
+  <!-- Integrations -->
+  <section class="px-8 lg:px-[120px] py-[72px] flex flex-col gap-10">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-end gap-5">
+        <span class="text-[14px] font-bold text-[var(--color-accent)]">{en.integrations.label}</span>
+        <h2 class="text-[clamp(28px,4vw,42px)] font-bold" data-en={en.integrations.title} data-es={es.integrations.title}>{en.integrations.title}</h2>
+      </div>
+      <p class="text-[15px] text-[var(--color-fg-muted)]" data-en={en.integrations.sub} data-es={es.integrations.sub}>{en.integrations.sub}</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {en.integrations.items.map((item, i) => (
+        <div class:list={[
+          'flex flex-col gap-4 p-8 border-2',
+          item.badge === 'LIVE' ? 'border-[var(--color-accent)]' : 'border-[var(--color-border)] opacity-60'
+        ]}>
+          <div class="flex items-center justify-between">
+            <span class="text-[22px] font-bold">{item.name}</span>
+            <span class:list={[
+              'text-[12px] font-bold px-2.5 py-1',
+              item.badge === 'LIVE'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-fg)]'
+                : 'border border-[var(--color-border)] text-[var(--color-fg-muted)]'
+            ]} data-en={item.badge} data-es={es.integrations.items[i].badge}>{item.badge}</span>
+          </div>
+          <p class="text-[14px] text-[var(--color-fg-muted)] leading-relaxed" data-en={item.desc} data-es={es.integrations.items[i].desc}>{item.desc}</p>
+        </div>
+      ))}
     </div>
   </section>
 
